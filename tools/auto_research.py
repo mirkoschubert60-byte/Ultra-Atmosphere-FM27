@@ -50,7 +50,7 @@ def main():
     if isinstance(clubs, dict):
         clubs = clubs["clubs"]
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {"next_index": 0, "processed": 0, "errors": 0, "candidates": 0}
-    catalog_id = "world-42757-v1" if source.is_dir() else "seed-40-v1"
+    catalog_id = "world-42757-v1" if catalog_path.is_dir() else "seed-40-v1"
     if state.get("catalog_id") != catalog_id:
         state = {"next_index": 0, "processed": 0, "errors": 0, "candidates": 0, "catalog_id": catalog_id}
     start = state["next_index"]
