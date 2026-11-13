@@ -15,9 +15,9 @@ from triage_candidates import assess
 
 ROOT = pathlib.Path("Data/research_batches")
 ROOT.mkdir(parents=True, exist_ok=True)
-STATE = ROOT / "progress.json"
-RESULTS = ROOT / "candidates.jsonl"
-ERRORS = ROOT / "errors.jsonl"
+STATE = ROOT / "world_progress.json"
+RESULTS = ROOT / "world_candidates.jsonl"
+ERRORS = ROOT / "world_errors.jsonl"
 CATALOG = ROOT / "seed_40.json"
 
 def append_jsonl(path, data):
@@ -26,11 +26,11 @@ def append_jsonl(path, data):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--count", type=int, default=3)
+    parser.add_argument("--count", type=int, default=30)
     parser.add_argument("--catalog", default=str(CATALOG))
     args = parser.parse_args()
-    if not 1 <= args.count <= 5:
-        parser.error("count must be 1..5")
+    if not 1 <= args.count <= 50:
+        parser.error("count must be 1..50")
     catalog_path = pathlib.Path(args.catalog)
     if catalog_path.is_dir():
         parts = sorted(catalog_path.glob("part_*.json"))
