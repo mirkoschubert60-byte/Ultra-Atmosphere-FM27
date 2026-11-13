@@ -24,7 +24,7 @@ API = "https://commons.wikimedia.org/w/api.php"
 HEADERS = {"User-Agent": "UltraAtmosphereFM27/0.1 (noncommercial research; GitHub repository mirkoschubert60-byte/Ultra-Atmosphere-FM27)"}
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
-ALLOWED_HOSTS = {"upload.wikimedia.org"}
+ALLOWED_HOSTS = {"upload.wikimedia.org", "thumb.wikimedia.org"}
 OUT = Path("output")
 
 
