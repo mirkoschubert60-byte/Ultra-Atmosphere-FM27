@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - '.github/workflows/automatic-research.yml'
-      - 'Data/research_batches/world_catalog.json'
+      - 'Data/research_batches/catalog_parts/**'
   schedule:
     - cron: '23 * * * *'
   workflow_dispatch:
@@ -24,13 +24,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      - name: Research next clubs and save progress
-        run: |
-          if [ -f Data/research_batches/world_catalog.json ]; then
-            python tools/auto_research.py --catalog Data/research_batches/world_catalog.json --count 5
-          else
-            python tools/auto_research.py --count 5
-          fi
+      - name: Research worldwide club catalog
+        run: python tools/auto_research.py --catalog Data/research_batches/catalog_parts --count 5
       - name: Commit progress and source metadata
         run: |
           git config user.name "github-actions[bot]"
