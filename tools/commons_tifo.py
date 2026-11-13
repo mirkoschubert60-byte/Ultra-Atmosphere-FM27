@@ -14,6 +14,8 @@ import io
 import json
 import re
 import time
+from email.utils import parsedate_to_datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -29,16 +31,35 @@ OUT = Path("output")
 
 
 def query(params):
+    """Respect Commons rate limiting with bounded retries and Retry-After."""
     params = {"format": "json", "formatversion": 2, **params}
-    for attempt in range(3):
+    for attempt in range(6):
         try:
             response = SESSION.get(API, params=params, timeout=35)
+            if response.status_code in (429, 500, 502, 503, 504):
+                if attempt == 5:
+                    response.raise_for_status()
+                retry_after = response.headers.get("Retry-After", "")
+                try:
+                    delay = max(1.0, min(90.0, float(retry_after)))
+                except ValueError:
+                    try:
+                        delay = max(1.0, min(90.0, (parsedate_to_datetime(retry_after) - datetime.now(timezone.utc)).total_seconds()))
+                    except (TypeError, OverflowError, ValueError):
+                        delay = min(90.0, 5.0 * (2 ** attempt))
+                print(f"Commons HTTP {response.status_code}; waiting {delay:.0f}s (attempt {attempt + 1}/6)", flush=True)
+                time.sleep(delay)
+                continue
             response.raise_for_status()
-            return response.json()
-        except requests.RequestException:
-            if attempt == 2:
+            data = response.json()
+            if "error" in data:
+                raise ValueError(f"Commons API error: {data['error'].get('code', 'unknown')}")
+            return data
+        except (requests.ConnectionError, requests.Timeout):
+            if attempt == 5:
                 raise
-            time.sleep(2 ** attempt)
+            time.sleep(min(90.0, 5.0 * (2 ** attempt)))
+    raise RuntimeError("Commons retries exhausted")
 
 
 def search(club, limit=8):
@@ -66,7 +87,7 @@ def search(club, limit=8):
                    "license_url": meta("LicenseUrl"), "attribution": meta("Attribution"),
                    "description": meta("ImageDescription"),
                    "reviewed_club_match": False, "reviewed_license": False}
-        time.sleep(0.6)
+        time.sleep(3.0)
 
 
 def download(candidate, destination):
