@@ -4,6 +4,7 @@ import io
 import json
 import pathlib
 import requests
+import time
 from PIL import Image, ImageOps
 from urllib.parse import urlparse
 
@@ -22,9 +23,15 @@ for index, item in enumerate(candidates[:20], 1):
              "license": item.get("license"), "license_url": item.get("license_url"),
              "status": "not_downloaded"}
     try:
-        if host.scheme != "https" or host.hostname != "upload.wikimedia.org":
+        if host.scheme != "https" or host.hostname not in {"upload.wikimedia.org", "thumb.wikimedia.org"}:
             raise ValueError("Unexpected image host")
-        response = session.get(url, timeout=30)
+        response = None
+        for attempt in range(4):
+            response = session.get(url, timeout=35)
+            if response.status_code in (429, 500, 502, 503, 504):
+                time.sleep(min(20, 3 * (attempt + 1)))
+                continue
+            break
         response.raise_for_status()
         if len(response.content) > 20_000_000:
             raise ValueError("File too large")
@@ -41,6 +48,7 @@ for index, item in enumerate(candidates[:20], 1):
     except (ValueError, requests.RequestException, OSError) as exc:
         entry["error"] = str(exc)[:300]
     report.append(entry)
+    time.sleep(1.5)
 (root / "preview_manifest.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 print("Previews downloaded:", sum(x["status"] == "preview_downloaded" for x in report), "of", len(report))
 print("Note: previews are NOT approved club matches or game assets.")
