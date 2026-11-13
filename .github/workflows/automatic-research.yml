@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/workflows/automatic-research.yml'
       - 'Data/research_batches/catalog_parts/**'
+      - 'tools/auto_research.py'
   schedule:
     - cron: '23 * * * *'
   workflow_dispatch:
