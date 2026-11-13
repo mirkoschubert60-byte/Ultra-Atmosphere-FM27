@@ -27,8 +27,13 @@ jobs:
           CLUB: ${{ inputs.club }}
           CLUB_ID: ${{ inputs.club_id }}
         run: python tools/commons_tifo.py --club "$CLUB" --club-id "$CLUB_ID"
+      - name: Download real photo previews for review
+        run: python tools/download_previews.py
       - uses: actions/upload-artifact@v4
         with:
           name: tifo-research-candidates
-          path: output/candidates.*
+          path: |
+            output/candidates.*
+            output/preview_manifest.json
+            output/previews/*.jpg
           retention-days: 7
