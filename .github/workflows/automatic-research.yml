@@ -1,7 +1,11 @@
 name: Automatic FM27 Worldwide Image Research
 on:
+  push:
+    paths:
+      - '.github/workflows/automatic-research.yml'
+      - 'Data/research_batches/world_catalog.json'
   schedule:
-    - cron: '23 4 * * *'
+    - cron: '23 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -11,7 +15,7 @@ concurrency:
 jobs:
   research:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,7 +25,12 @@ jobs:
           python-version: '3.11'
       - run: pip install -r requirements.txt
       - name: Research next clubs and save progress
-        run: python tools/auto_research.py --count 3
+        run: |
+          if [ -f Data/research_batches/world_catalog.json ]; then
+            python tools/auto_research.py --catalog Data/research_batches/world_catalog.json --count 5
+          else
+            python tools/auto_research.py --count 5
+          fi
       - name: Commit progress and source metadata
         run: |
           git config user.name "github-actions[bot]"
