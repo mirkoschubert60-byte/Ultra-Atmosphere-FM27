@@ -31,7 +31,22 @@ def main():
     args = parser.parse_args()
     if not 1 <= args.count <= 5:
         parser.error("count must be 1..5")
-    clubs = json.loads(pathlib.Path(args.catalog).read_text(encoding="utf-8"))
+    catalog_path = pathlib.Path(args.catalog)
+    if catalog_path.is_dir():
+        parts = sorted(catalog_path.glob("part_*.json"))
+        if len(parts) != 43:
+            raise RuntimeError(f"Expected 43 catalog parts; found {len(parts)}. Refusing incomplete scan.")
+        clubs = []
+        for part in parts:
+            clubs.extend(json.loads(part.read_text(encoding="utf-8")))
+        if len(clubs) != 42757:
+            raise RuntimeError(f"Expected 42757 clubs; got {len(clubs)}")
+        global STATE, RESULTS, ERRORS
+        STATE = ROOT / "world_progress.json"
+        RESULTS = ROOT / "world_candidates.jsonl"
+        ERRORS = ROOT / "world_errors.jsonl"
+    else:
+        clubs = json.loads(catalog_path.read_text(encoding="utf-8"))
     if isinstance(clubs, dict):
         clubs = clubs["clubs"]
     state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {"next_index": 0, "processed": 0, "errors": 0, "candidates": 0}
