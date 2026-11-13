@@ -19,9 +19,10 @@ def assess(item):
     desc = norm(item.get("description", ""))
     source = title + " " + desc
     words = [x for x in club.split() if len(x) >= 5 and x not in {"football", "sporting", "club"}]
-    match = bool(club and (club in source or (words and all(w in source for w in words))))
+    compact_title = title.replace(" ", "")
+    match = bool(club and (club in source or (words and all(w in source for w in words)) or ("eintracht" in club and "eintrachtadler" in compact_title)))
     positive = bool(re.search(r"\b(tifo|choreograph\w*|choreo|choreografie|choreography|choreographie)\b", source))
-    opposing = ["fans of ", "supporters of ", "fan with ", "paok fc fans", "hertha berlin supporters"]
+    opposing = ["fans of ", "supporters of ", "fan with ", "paok fc fans", "hertha berlin supporters", "wolfsburg fan"]
     other_team = any(title.startswith(t) for t in opposing) and not title.startswith(club + " fans")
     if not match or other_team:
         status, reason = "reject", "Club not clearly depicted or title identifies other supporters"
