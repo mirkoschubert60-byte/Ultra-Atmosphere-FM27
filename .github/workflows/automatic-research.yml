@@ -6,7 +6,7 @@ on:
       - 'Data/research_batches/catalog_parts/**'
       - 'tools/auto_research.py'
   schedule:
-    - cron: '23 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
