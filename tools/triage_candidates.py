@@ -22,7 +22,7 @@ def assess(item):
     match = bool(club and (club in source or (words and all(w in source for w in words))))
     positive = bool(re.search(r"\b(tifo|choreograph\w*|choreo|choreografie|choreography|choreographie)\b", source))
     opposing = ["fans of ", "supporters of ", "fan with ", "paok fc fans", "hertha berlin supporters"]
-    other_team = any(t in title for t in opposing) and club not in title
+    other_team = any(title.startswith(t) for t in opposing) and not title.startswith(club + " fans")
     if not match or other_team:
         status, reason = "reject", "Club not clearly depicted or title identifies other supporters"
     elif positive:
