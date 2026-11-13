@@ -27,6 +27,8 @@ jobs:
           CLUB: ${{ inputs.club }}
           CLUB_ID: ${{ inputs.club_id }}
         run: python tools/commons_tifo.py --club "$CLUB" --club-id "$CLUB_ID"
+      - name: Filter club-specific choreography candidates
+        run: python tools/triage_candidates.py
       - name: Download real photo previews for review
         run: python tools/download_previews.py
       - uses: actions/upload-artifact@v4
@@ -34,6 +36,7 @@ jobs:
           name: tifo-research-candidates
           path: |
             output/candidates.*
+            output/triage.*
             output/preview_manifest.json
             output/previews/*.jpg
           retention-days: 7
