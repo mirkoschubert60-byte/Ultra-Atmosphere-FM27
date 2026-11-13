@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "club": "Eintracht Frankfurt",
+  "fm27_club_id": null,
+  "review_note": "Both photos depict the same Eintracht eagle tifo from the 2007/08 season, not two distinct choreographies. Visual source review completed; final redistribution/license compliance and game rendering still pending.",
+  "candidates": [
+    {
+      "title": "File:Eintrachtadler.JPG",
+      "source": "https://commons.wikimedia.org/wiki/File:Eintrachtadler.JPG",
+      "author": "Dirk Ingo Franke",
+      "license": "CC BY-SA 2.0 de",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/de/deed.en",
+      "depicts_club": true,
+      "depicts_tifo": true,
+      "license_approved_for_distribution": false,
+      "game_asset_exported": false
+    },
+    {
+      "title": "File:Waldstadion eintrachtadler.JPG",
+      "source": "https://commons.wikimedia.org/wiki/File:Waldstadion_eintrachtadler.JPG",
+      "author": "Dirk Ingo Franke",
+      "license": "CC BY-SA 2.0 de",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0/de/deed.en",
+      "depicts_club": true,
+      "depicts_tifo": true,
+      "license_approved_for_distribution": false,
+      "game_asset_exported": false
+    }
+  ]
+}
