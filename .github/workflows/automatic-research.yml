@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A Data/research_batches/
+          git add -A Data/research_batches/world_progress.json Data/research_batches/world_candidates.jsonl Data/research_batches/world_errors.jsonl 2>/dev/null || git add -A Data/research_batches/
           if ! git diff --cached --quiet; then
             git commit -m "Research next FM27 clubs automatically [skip ci]"
             git push
