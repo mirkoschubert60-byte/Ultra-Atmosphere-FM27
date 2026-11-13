@@ -1,0 +1,202 @@
+[
+  {
+    "uid": 679,
+    "name": "Manchester City",
+    "women": false
+  },
+  {
+    "uid": 1736,
+    "name": "Real Madrid C.F.",
+    "women": false
+  },
+  {
+    "uid": 1708,
+    "name": "F.C. Barcelona",
+    "women": false
+  },
+  {
+    "uid": 2000099871,
+    "name": "Chelsea",
+    "women": true
+  },
+  {
+    "uid": 2000167899,
+    "name": "F.C. Barcelona",
+    "women": true
+  },
+  {
+    "uid": 2000149869,
+    "name": "OL Lyonnes",
+    "women": true
+  },
+  {
+    "uid": 602,
+    "name": "Arsenal",
+    "women": false
+  },
+  {
+    "uid": 2000104296,
+    "name": "Arsenal",
+    "women": true
+  },
+  {
+    "uid": 915,
+    "name": "FC Bayern München",
+    "women": false
+  },
+  {
+    "uid": 676,
+    "name": "Liverpool",
+    "women": false
+  },
+  {
+    "uid": 1687,
+    "name": "Club Atlético de Madrid",
+    "women": false
+  },
+  {
+    "uid": 868,
+    "name": "Paris Saint-Germain",
+    "women": false
+  },
+  {
+    "uid": 2000104573,
+    "name": "Manchester City",
+    "women": true
+  },
+  {
+    "uid": 2000148292,
+    "name": "FC Bayern München",
+    "women": true
+  },
+  {
+    "uid": 1135,
+    "name": "F.C. Internazionale Milano",
+    "women": false
+  },
+  {
+    "uid": 2000148221,
+    "name": "VfL Wolfsburg",
+    "women": true
+  },
+  {
+    "uid": 1139,
+    "name": "Juventus F.C.",
+    "women": false
+  },
+  {
+    "uid": 1099,
+    "name": "A.C. Milan",
+    "women": false
+  },
+  {
+    "uid": 1150,
+    "name": "S.S.C. Napoli",
+    "women": false
+  },
+  {
+    "uid": 680,
+    "name": "Manchester United",
+    "women": false
+  },
+  {
+    "uid": 2000134698,
+    "name": "Gotham FC",
+    "women": true
+  },
+  {
+    "uid": 1487,
+    "name": "Sport Lisboa e Benfica",
+    "women": false
+  },
+  {
+    "uid": 630,
+    "name": "Chelsea",
+    "women": false
+  },
+  {
+    "uid": 2000453602,
+    "name": "Denver Summit FC",
+    "women": true
+  },
+  {
+    "uid": 1478,
+    "name": "Futebol Clube do Porto",
+    "women": false
+  },
+  {
+    "uid": 1777,
+    "name": "Villarreal C.F.",
+    "women": false
+  },
+  {
+    "uid": 1742,
+    "name": "Real Sociedad de Fútbol",
+    "women": false
+  },
+  {
+    "uid": 2000254864,
+    "name": "Club de Fútbol América",
+    "women": true
+  },
+  {
+    "uid": 1100,
+    "name": "A.S. Roma",
+    "women": false
+  },
+  {
+    "uid": 1664,
+    "name": "Athletic Club",
+    "women": false
+  },
+  {
+    "uid": 1733,
+    "name": "Real Betis Balompié",
+    "women": false
+  },
+  {
+    "uid": 2000132567,
+    "name": "Washington Spirit",
+    "women": true
+  },
+  {
+    "uid": 907,
+    "name": "Borussia Dortmund",
+    "women": false
+  },
+  {
+    "uid": 2000192337,
+    "name": "KC Current",
+    "women": true
+  },
+  {
+    "uid": 322,
+    "name": "Clube de Regatas do Flamengo",
+    "women": false
+  },
+  {
+    "uid": 2000149870,
+    "name": "Paris Saint-Germain",
+    "women": true
+  },
+  {
+    "uid": 603,
+    "name": "Aston Villa",
+    "women": false
+  },
+  {
+    "uid": 2000192381,
+    "name": "Angel City FC",
+    "women": true
+  },
+  {
+    "uid": 2000167907,
+    "name": "Real Madrid C.F.",
+    "women": true
+  },
+  {
+    "uid": 2000134582,
+    "name": "Portland Thorns",
+    "women": true
+  }
+]
