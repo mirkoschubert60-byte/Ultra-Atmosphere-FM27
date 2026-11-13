@@ -7,7 +7,7 @@ import re
 import unicodedata
 
 ROOT = pathlib.Path("output")
-data = json.loads((ROOT / "candidates.json").read_text(encoding="utf-8"))
+
 
 def norm(value):
     value = unicodedata.normalize("NFKD", value or "")
@@ -36,12 +36,15 @@ def assess(item):
             "status": status, "reason": reason,
             "reviewed_club_match": False, "reviewed_license": False}
 
-result = [assess(x) for x in data]
-(ROOT / "triage.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-with (ROOT / "triage.csv").open("w", newline="", encoding="utf-8") as fp:
-    writer = csv.DictWriter(fp, fieldnames=list(result[0]) if result else ["club", "status"])
-    writer.writeheader()
-    writer.writerows(result)
-for status in ("review_priority", "manual_review", "reject"):
-    print(status, sum(x["status"] == status for x in result))
-print("No photos or licenses automatically approved.")
+if __name__ == "__main__":
+    data = json.loads((ROOT / "candidates.json").read_text(encoding="utf-8"))
+    result = [assess(x) for x in data]
+    (ROOT / "triage.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    with (ROOT / "triage.csv").open("w", newline="", encoding="utf-8") as fp:
+        writer = csv.DictWriter(fp, fieldnames=list(result[0]) if result else ["club", "status"])
+        writer.writeheader()
+        writer.writerows(result)
+    for status in ("review_priority", "manual_review", "reject"):
+        print(status, sum(x["status"] == status for x in result))
+    print("No photos or licenses automatically approved.")
+    
