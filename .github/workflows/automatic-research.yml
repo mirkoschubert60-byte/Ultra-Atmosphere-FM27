@@ -34,7 +34,23 @@ jobs:
           git add -A Data/research_batches/world_progress.json Data/research_batches/world_candidates.jsonl Data/research_batches/world_errors.jsonl 2>/dev/null || git add -A Data/research_batches/
           if ! git diff --cached --quiet; then
             git commit -m "Research next FM27 clubs automatically [skip ci]"
-            git push
+            # Rebase onto the latest main before pushing. Never force-push.
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort || true
+                echo "::error::Research progress rebase conflict; refusing to overwrite remote data."
+                exit 1
+              fi
+              if git push origin HEAD:main; then
+                echo "Research progress saved successfully."
+                exit 0
+              fi
+              echo "Concurrent push detected; retry $attempt"
+              sleep $((attempt * 5))
+            done
+            echo "::error::Push failed after five retries."
+            exit 1
           else
             echo "No new research; all seed clubs completed."
           fi
