@@ -87,10 +87,11 @@ def main():
                 found += 1
             append_jsonl(RESOLVED, {"index": index, "uid": club["uid"],
                 "resolved_at": now_retry, "candidates": found})
+            failed.pop(index, None)
             state["errors"] = max(0, state["errors"] - 1)
             state["candidates"] += found
             state["updated_at"] = now_retry
-            STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+            STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             print("RETRY OK", index, club["name"], found, flush=True)
         except Exception as exc:
             print("RETRY PENDING", index, club["name"], str(exc), flush=True)
