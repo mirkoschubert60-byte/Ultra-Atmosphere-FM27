@@ -18,6 +18,7 @@ ROOT.mkdir(parents=True, exist_ok=True)
 STATE = ROOT / "world_progress.json"
 RESULTS = ROOT / "world_candidates.jsonl"
 ERRORS = ROOT / "world_errors.jsonl"
+RESOLVED = ROOT / "world_resolved_errors.jsonl"
 CATALOG = ROOT / "seed_40.json"
 
 def append_jsonl(path, data):
@@ -41,10 +42,11 @@ def main():
             clubs.extend(json.loads(part.read_text(encoding="utf-8")))
         if len(clubs) != 42757:
             raise RuntimeError(f"Expected 42757 clubs; got {len(clubs)}")
-        global STATE, RESULTS, ERRORS
+        global STATE, RESULTS, ERRORS, RESOLVED
         STATE = ROOT / "world_progress.json"
         RESULTS = ROOT / "world_candidates.jsonl"
         ERRORS = ROOT / "world_errors.jsonl"
+        RESOLVED = ROOT / "world_resolved_errors.jsonl"
     else:
         clubs = json.loads(catalog_path.read_text(encoding="utf-8"))
     if isinstance(clubs, dict):
@@ -55,8 +57,48 @@ def main():
         state = {"next_index": 0, "processed": 0, "errors": 0, "candidates": 0, "catalog_id": catalog_id}
     start = state["next_index"]
     now = datetime.now(timezone.utc).isoformat()
+    # Preserve the append-only error log; track successful retries separately.
+    failed = {}
+    if ERRORS.exists():
+        for line in ERRORS.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                entry = json.loads(line)
+                if entry.get("retry_needed"):
+                    failed[entry["index"]] = entry
+    if RESOLVED.exists():
+        for line in RESOLVED.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                failed.pop(json.loads(line)["index"], None)
+    # Retry one failed club each run, without advancing the main cursor.
+    # A successful retry is recorded only after all its candidate writes succeed.
+    if failed:
+        index = min(failed)
+        club = clubs[index]
+        now_retry = datetime.now(timezone.utc).isoformat()
+        try:
+            found = 0
+            for item in search(club["name"], limit=3):
+                item["club_id"] = club["uid"]
+                item["women"] = club.get("women", False)
+                decision = assess(item)
+                append_jsonl(RESULTS, {**item, "triage_status": decision["status"],
+                    "triage_reason": decision["reason"], "auto_approved": False,
+                    "searched_at": now_retry})
+                found += 1
+            append_jsonl(RESOLVED, {"index": index, "uid": club["uid"],
+                "resolved_at": now_retry, "candidates": found})
+            state["errors"] = max(0, state["errors"] - 1)
+            state["candidates"] += found
+            state["updated_at"] = now_retry
+            STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+            print("RETRY OK", index, club["name"], found, flush=True)
+        except Exception as exc:
+            print("RETRY PENDING", index, club["name"], str(exc), flush=True)
     if start >= len(clubs):
-        print("COMPLETE: all", len(clubs), "seed clubs processed; no further API requests")
+        if state.get("errors", 0) == 0 and not failed:
+            print("COMPLETE: all", len(clubs), "clubs processed; no open errors")
+        else:
+            print("PENDING: all catalog entries scanned, but retries remain")
         return
     for index in range(start, min(start + args.count, len(clubs))):
         club = clubs[index]
