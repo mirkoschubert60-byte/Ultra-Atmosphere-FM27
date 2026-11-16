@@ -1,2 +1,3 @@
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 1202, "name": "SV Meppen", "retry_needed": true, "searched_at": "2026-11-14T15:59:30.453395+00:00", "uid": 2000214218}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 2752, "name": "Sorrento Calcio 1945", "retry_needed": true, "searched_at": "2026-11-15T14:07:43.525188+00:00", "uid": 831366}
+{"error": "Commons API error: urlparamnormal", "index": 3997, "name": "Sohar", "retry_needed": true, "searched_at": "2026-11-16T11:40:48.426510+00:00", "uid": 135326}
