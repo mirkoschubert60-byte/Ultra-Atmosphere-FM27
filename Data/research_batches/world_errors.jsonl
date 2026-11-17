@@ -3,3 +3,4 @@
 {"error": "Commons API error: urlparamnormal", "index": 3997, "name": "Sohar", "retry_needed": true, "searched_at": "2026-11-16T11:40:48.426510+00:00", "uid": 135326}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 4302, "name": "A.C. Crema 1908 S.S.D.", "retry_needed": true, "searched_at": "2026-11-16T20:45:12.209319+00:00", "uid": 43066063}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 4972, "name": "Universität Hiroshima Shudo", "retry_needed": true, "searched_at": "2026-11-17T08:42:16.897710+00:00", "uid": 45031862}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 5052, "name": "MFK Frýdek-Místek", "retry_needed": true, "searched_at": "2026-11-17T10:39:01.648025+00:00", "uid": 136181}
