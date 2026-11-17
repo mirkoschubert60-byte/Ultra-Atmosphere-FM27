@@ -16,3 +16,9 @@
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 5718, "name": "Quevilly-Rouen Metropole", "retry_needed": true, "searched_at": "2026-11-17T22:49:23.871549+00:00", "uid": 2000341767}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 5719, "name": "R.C. Celta de Vigo", "retry_needed": true, "searched_at": "2026-11-17T22:49:23.871549+00:00", "uid": 2000373523}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 5736, "name": "Sant Cugat F.C.", "retry_needed": true, "searched_at": "2026-11-17T22:49:23.871549+00:00", "uid": 2000476878}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 5758, "name": "Southside Eagles FC", "retry_needed": true, "searched_at": "2026-11-17T23:35:42.409958+00:00", "uid": 15045011}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 5759, "name": "Spartak Myjava", "retry_needed": true, "searched_at": "2026-11-17T23:35:42.409958+00:00", "uid": 2000278281}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 5760, "name": "SPG Geretsberg/Bürmoos", "retry_needed": true, "searched_at": "2026-11-17T23:35:42.409958+00:00", "uid": 2000288454}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 5785, "name": "Surfers Paradise Apollo SC", "retry_needed": true, "searched_at": "2026-11-17T23:35:42.409958+00:00", "uid": 15025463}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 5786, "name": "SV Bergisch Gladbach 09", "retry_needed": true, "searched_at": "2026-11-17T23:35:42.409958+00:00", "uid": 879856}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 5787, "name": "Team AFF/FFV Fribourg", "retry_needed": true, "searched_at": "2026-11-17T23:35:42.409958+00:00", "uid": 98042237}
