@@ -38,3 +38,5 @@
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 6870, "name": "Perth", "retry_needed": true, "searched_at": "2026-11-18T20:58:54.140279+00:00", "uid": 2000428862}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 6885, "name": "Rapid Club de Rélizane", "retry_needed": true, "searched_at": "2026-11-18T20:58:54.140279+00:00", "uid": 8625329}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 6889, "name": "Riga FC", "retry_needed": true, "searched_at": "2026-11-18T20:58:54.140279+00:00", "uid": 2000357197}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 6958, "name": "Tihad Sportif de Casablanca", "retry_needed": true, "searched_at": "2026-11-18T22:36:27.396525+00:00", "uid": 5380017}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 6988, "name": "University of Pretoria", "retry_needed": true, "searched_at": "2026-11-18T22:36:27.396525+00:00", "uid": 2000338910}
