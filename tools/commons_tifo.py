@@ -53,7 +53,15 @@ def query(params):
             response.raise_for_status()
             data = response.json()
             if "error" in data:
-                raise ValueError(f"Commons API error: {data['error'].get('code', 'unknown')}")
+                code = data["error"].get("code", "unknown")
+                # Commons can report temporary search overload with HTTP 200.
+                # Retry these API-level failures instead of abandoning the club.
+                if code in ("cirrussearch-too-busy-error", "readonly", "maxlag", "ratelimited") and attempt < 5:
+                    delay = min(90.0, 5.0 * (2 ** attempt))
+                    print(f"Commons API {code}; waiting {delay:.0f}s (attempt {attempt + 1}/6)", flush=True)
+                    time.sleep(delay)
+                    continue
+                raise ValueError(f"Commons API error: {code}")
             return data
         except (requests.ConnectionError, requests.Timeout):
             if attempt == 5:
