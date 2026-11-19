@@ -32,25 +32,33 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A Data/research_batches/world_progress.json Data/research_batches/world_candidates.jsonl Data/research_batches/world_errors.jsonl Data/research_batches/world_resolved_errors.jsonl 2>/dev/null || git add -A Data/research_batches/
-          if ! git diff --cached --quiet; then
-            git commit -m "Research next FM27 clubs automatically [skip ci]"
-            # Rebase onto the latest main before pushing. Never force-push.
-            for attempt in 1 2 3 4 5; do
-              git fetch origin main
-              if ! git rebase origin/main; then
-                git rebase --abort || true
-                echo "::error::Research progress rebase conflict; refusing to overwrite remote data."
-                exit 1
-              fi
-              if git push origin HEAD:main; then
-                echo "Research progress saved successfully."
+          if git diff --cached --quiet; then
+            echo "No new research changes to commit."
+            exit 0
+          fi
+          git commit -m "Research next FM27 clubs automatically [skip ci]"
+          # On a conflict, discard ONLY this runner's unpushed batch and
+          # regenerate it from the latest committed state. Never force-push.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "Rebase conflict; rebuilding research batch from latest origin/main (attempt $attempt)."
+              git reset --hard origin/main
+              python tools/auto_research.py --catalog Data/research_batches/catalog_parts --count 50
+              git add -A Data/research_batches/
+              if git diff --cached --quiet; then
+                echo "Research already incorporated upstream."
                 exit 0
               fi
-              echo "Concurrent push detected; retry $attempt"
-              sleep $((attempt * 5))
-            done
-            echo "::error::Push failed after five retries."
-            exit 1
-          else
-            echo "No new research; all seed clubs completed."
-          fi
+              git commit -m "Research next FM27 clubs automatically [skip ci]"
+            fi
+            if git push origin HEAD:main; then
+              echo "Research progress saved successfully."
+              exit 0
+            fi
+            echo "Concurrent push detected; retry $attempt"
+            sleep $((attempt * 5))
+          done
+          echo "::error::Push failed after five retries; remote data left untouched."
+          exit 1
