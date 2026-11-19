@@ -46,3 +46,6 @@
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7139, "name": "C.D.F.B. L'Eliana", "retry_needed": true, "searched_at": "2026-11-19T01:28:03.383552+00:00", "uid": 2000486739}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7143, "name": "C.E. Europa B", "retry_needed": true, "searched_at": "2026-11-19T01:28:03.383552+00:00", "uid": 2000328222}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7245, "name": "KVK Ieper", "retry_needed": true, "searched_at": "2026-11-19T03:21:16.842394+00:00", "uid": 8161362}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 7508, "name": "FC Hertha Wiesbach", "retry_needed": true, "searched_at": "2026-11-19T09:42:30.994573+00:00", "uid": 35120656}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 7522, "name": "FK Orkla", "retry_needed": true, "searched_at": "2026-11-19T09:42:30.994573+00:00", "uid": 1367}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 7532, "name": "FV Dudenhofen", "retry_needed": true, "searched_at": "2026-11-19T09:42:30.994573+00:00", "uid": 91148412}
