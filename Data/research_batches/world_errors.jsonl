@@ -49,3 +49,6 @@
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7508, "name": "FC Hertha Wiesbach", "retry_needed": true, "searched_at": "2026-11-19T09:42:30.994573+00:00", "uid": 35120656}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7522, "name": "FK Orkla", "retry_needed": true, "searched_at": "2026-11-19T09:42:30.994573+00:00", "uid": 1367}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7532, "name": "FV Dudenhofen", "retry_needed": true, "searched_at": "2026-11-19T09:42:30.994573+00:00", "uid": 91148412}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 7551, "name": "L'Emulation Schœlcher", "retry_needed": true, "searched_at": "2026-11-19T10:36:33.670756+00:00", "uid": 2000433428}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 7555, "name": "Ludwigsfelder FC", "retry_needed": true, "searched_at": "2026-11-19T10:36:33.670756+00:00", "uid": 879632}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 7582, "name": "Real Succes ŞS11 Pudra-Chişinău", "retry_needed": true, "searched_at": "2026-11-19T10:36:33.670756+00:00", "uid": 2000278009}
