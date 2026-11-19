@@ -45,3 +45,4 @@
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7135, "name": "C.D.E. Atlético Mineros", "retry_needed": true, "searched_at": "2026-11-19T01:28:03.383552+00:00", "uid": 2000486698}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7139, "name": "C.D.F.B. L'Eliana", "retry_needed": true, "searched_at": "2026-11-19T01:28:03.383552+00:00", "uid": 2000486739}
 {"error": "Commons API error: cirrussearch-too-busy-error", "index": 7143, "name": "C.E. Europa B", "retry_needed": true, "searched_at": "2026-11-19T01:28:03.383552+00:00", "uid": 2000328222}
+{"error": "Commons API error: cirrussearch-too-busy-error", "index": 7245, "name": "KVK Ieper", "retry_needed": true, "searched_at": "2026-11-19T03:21:16.842394+00:00", "uid": 8161362}
