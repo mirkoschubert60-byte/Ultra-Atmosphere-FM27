@@ -69,10 +69,14 @@ def main():
         for line in RESOLVED.read_text(encoding="utf-8").splitlines():
             if line.strip():
                 failed.pop(json.loads(line)["index"], None)
-    # Retry one failed club each run, without advancing the main cursor.
-    # A successful retry is recorded only after all its candidate writes succeed.
+    # Rotate retries so one persistently failing club cannot starve all others.
+    # Store the cursor with progress; do not rewrite historical error records.
     if failed:
-        index = min(failed)
+        pending = sorted(failed)
+        cursor = int(state.get("retry_cursor", 0))
+        index = pending[cursor % len(pending)]
+        state["retry_cursor"] = cursor + 1
+        STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         club = clubs[index]
         now_retry = datetime.now(timezone.utc).isoformat()
         try:
