@@ -1,10 +1,10 @@
 {
-  "next_index": 10400,
-  "processed": 10400,
+  "next_index": 10450,
+  "processed": 10450,
   "errors": 1,
-  "candidates": 6266,
+  "candidates": 6295,
   "catalog_id": "world-42757-v1",
   "total_clubs": 42757,
-  "updated_at": "2026-11-21T12:10:39.981948+00:00",
-  "retry_cursor": 53
+  "updated_at": "2026-11-21T13:00:15.538165+00:00",
+  "retry_cursor": 54
 }
